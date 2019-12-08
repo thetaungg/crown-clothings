@@ -20,7 +20,8 @@ const CollectionItem = ({item, addItems}) => {
         </div>
         <CustomButton onClick={()=> addItems(item)} inverted>Add To Cart</CustomButton> {/*taking individual item from collection preview and adding them to reducer */}
     </div>
-);}
+);
+};
 
 const mapDispatchToProps = dispatch => ({
     addItems: item => dispatch(addItems(item))

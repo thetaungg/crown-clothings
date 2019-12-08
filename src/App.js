@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from "reselect";
 
 import './App.css';
+
 import Homepage from "./pages/homepage/Homepage.components";
 import ShopPage from "./pages/shop/shop.component";
+import CheckoutPage from "./pages/checkout/checkout.component";
+
 import Header from "./components/header/header.component";
 import SignUpAndSignInPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import {selectCurrentUser} from "./redux/user/user.selectors";
@@ -53,6 +56,7 @@ class App extends React.Component {
                 <Header />
                 <Switch> {/*switch render the first component the path matches and ignore the rest */}
                     <Route exact path='/' component={Homepage}/>
+                    <Route exact path='/checkout' component={CheckoutPage}/>
                     <Route exact path='/hats' component={this.HatsPage}/>
                     <Route exact path='/shop' component={ShopPage}/>
                     <Route exact path='/signin' render={() => this.props.currentUser ?

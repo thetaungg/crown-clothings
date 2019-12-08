@@ -17,6 +17,11 @@
     flex-direction: column;
     overflow: auto; //removed default scroller when it's not needed // opposed to overflow: scroll
   }
+  .empty-message {
+    font-size: 18px;
+    margin: 50px auto;
+
+  }
 
   button {
     margin-top: auto;

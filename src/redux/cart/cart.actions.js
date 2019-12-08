@@ -8,4 +8,4 @@ export const addItems = item => ({
     type: CartActionTypes.ADD_ITEMS,
     payload: item
 
-})
+});

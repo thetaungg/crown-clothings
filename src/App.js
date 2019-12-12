@@ -18,11 +18,6 @@ import {setCurrentUser} from "./redux/user/user.actions";
 
 class App extends React.Component {
 
-    HatsPage = () => (
-        <div>
-            <h1>Hats Page</h1>
-        </div>
-    );
     unSubscribeFromAuth = null;
     componentDidMount() {
         const {setCurrentUser} = this.props; // be sure to use setCurrentUser from props not imported setCurrentUser
@@ -48,6 +43,8 @@ class App extends React.Component {
 
     componentWillUnmount() {
         this.unSubscribeFromAuth(); //to prevent memory leaks// when we unmount our app, we want to clear auth // this is not equal to signOut
+
+
     }
 
     render() {
@@ -57,8 +54,7 @@ class App extends React.Component {
                 <Switch> {/*switch render the first component the path matches and ignore the rest */}
                     <Route exact path='/' component={Homepage}/>
                     <Route exact path='/checkout' component={CheckoutPage}/>
-                    <Route exact path='/hats' component={this.HatsPage}/>
-                    <Route exact path='/shop' component={ShopPage}/>
+                    <Route path='/shop' component={ShopPage}/>
                     <Route exact path='/signin' render={() => this.props.currentUser ?
                         (<Redirect to='/'/>) : (<SignUpAndSignInPage/>) }/> {/*if the user is signedIn we are redirecting to the homepage*/}
                 </Switch>

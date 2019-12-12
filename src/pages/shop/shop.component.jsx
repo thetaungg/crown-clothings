@@ -1,27 +1,14 @@
 import React from 'react';
-import SHOP_DATA from "./shop.data";
-import CollectionPreview from "../../components/collection-preview/collection-preview.component";
+import { Route } from 'react-router-dom'
+import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
 
-class  ShopPage extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            collections: SHOP_DATA
+import CollectionPage from "../collection/collection.component";
 
-        }
-    }
-    render() {
-        const {collections} = this.state;
-        return(
-            <div className='shop-page'>
-                {
-                    collections.map(({id,...otherCollectionProps}) => (
-                        <CollectionPreview key={id} {...otherCollectionProps}/>
-                    ))
-                }
-            </div>
-        )
-    }
+const  ShopPage = ({ match }) => ( //one of the three props Route passed into ShopPage in App.js
+        <div className='shop-page'>
+            <Route exact path={`${match.path}`} component={CollectionsOverview} />
+            <Route path={`${match.path}/:collectionId`} component={CollectionPage}/> {/*if we want to make the url varying we don't want to make Route of ShopPage *exact* */}
+        </div>
+    );
 
-}
 export default ShopPage;

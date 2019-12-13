@@ -19,6 +19,7 @@ const CheckoutItem = ({cartItem,clearItem, addItems, removeItem}) => {
               </span>
               <span className="price">{price}</span>
           <div className="remove-button" onClick={() => clearItem(cartItem)}>&#10005;</div>  {/*UTF-8 wingdings*/}
+
       </div>
   )
 };

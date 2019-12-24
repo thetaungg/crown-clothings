@@ -1,3 +1,5 @@
+@import "../../assets/mixin";
+
 .collection-preview {
   display: flex;
   flex-direction: column;
@@ -10,7 +12,16 @@
   }
 
   .preview {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+
+    @include respond(tab-land) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @include respond(phone) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }

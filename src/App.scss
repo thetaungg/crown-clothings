@@ -1,0 +1,32 @@
+@import "./assets/mixin";
+
+body{
+    font-family: 'Open Sans Condensed', sans-serif;
+    padding: 2rem  6rem;
+
+    @include respond(tab-port) {
+        padding: 1rem 0;
+    }
+}
+html {
+    font-size: 62.5%; // 10/16 = 0.625% //so, 1rem = 10px now//
+
+    @include respond(tab-land) {
+        font-size: 56.25%;
+    }
+    @include respond(tab-port) {
+        font-size: 50%;
+    }
+    @include respond(big-desk) {
+        font-size: 75%;
+    }
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+*{
+    box-sizing: border-box; /*to make everything in a box(flex) in line//elements with padding tends to overflow from the box */
+}

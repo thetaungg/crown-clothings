@@ -1,19 +1,34 @@
+@import "../../assets/mixin";
+
 .collection-page {
   display: flex;
   flex-direction: column;
 
+  @include respond(tab-port) {
+    padding: 0 1rem;
+  }
+
   .title {
-    font-size: 38px;
-    margin: 0 auto 30px;
+    font-size: 3.8rem;
+    margin: 0 auto 3rem;
   }
 
   .items {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 1rem;
+
+    @include respond(tab-land) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @include respond(phone) {
+      width: 100%;
+      grid-template-columns: 1fr 1fr;
+    }
 
     & .collection-item {
-      margin-bottom: 30px;
+      margin-bottom: 3rem;
     }
   }
 }

@@ -1,15 +1,15 @@
 .checkout-item {
   width: 100%;
   display: flex;
-  min-height: 100px;
+  min-height: 10rem;
   border-bottom: 1px solid darkgrey;
-  padding: 15px 0;
-  font-size: 20px;
+  padding: 1.5rem 0;
+  font-size: 2rem;
   align-items: center;
 
   .image-container {
     width: 23%;
-    padding-right: 15px;
+    padding-right: 1.5rem;
 
     img {
       width: 100%;
@@ -29,12 +29,12 @@
       cursor: pointer;
     }
     .value {
-      margin: 2px 10px;
+      margin: .2rem 1rem;
     }
   }
 
   .remove-button {
-    padding-left: 12px;
+    padding-left: 1.2rem;
     cursor: pointer;
   }
 }

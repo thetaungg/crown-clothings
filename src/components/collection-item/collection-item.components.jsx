@@ -16,7 +16,7 @@ const CollectionItem = ({item, addItems}) => {
         />
         <div className='collection-footer'>
             <span className='name'>{name}</span>
-            <span className='price'>{price}</span>
+            <span className='price'>${price}</span>
         </div>
         <CustomButton onClick={()=> addItems(item)} inverted>Add To Cart</CustomButton> {/*taking individual item from collection preview and adding them to reducer */}
     </div>

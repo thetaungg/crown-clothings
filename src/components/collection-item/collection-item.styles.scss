@@ -1,24 +1,39 @@
+@import "../../assets/mixin";
+
 .collection-item {
   width: 22vw;
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 35rem;
   align-items: center;
   position: relative; //important
+
+  @include respond(tab-land) {
+    width: 100%;
+  }
+
+  @include respond(tab-port) {
+    width: 100%;
+  }
+
 
   .image {
     width: 100%;
     height: 95%;
     background-size: cover;
     background-position: center;
-    margin-bottom: 5px;
+    margin-bottom: .5rem;
   }
   .custom-button {
     width: 80%;
     opacity: 0.7;
     position: absolute; //important
-    top: 255px; /* total height*/
+    top: 25.5rem; /* total height*/
     display: none; //hidden
+
+    @include respond(tab-port) {
+      display: flex;
+    }
   }
   &:hover {
     .image {
@@ -29,18 +44,26 @@
       display: flex; //display on hover
     }
   }
+  @include respond(tab-port) {
+    &:hover{
+      .image {
+        opacity: 1;
+      }
+    }
+  }
+
 
   .collection-footer {
     width: 100%;
     height: 5%;
     display: flex;
     justify-content: space-between;
-    font-size: 18px;
+    font-size: 1.8rem;
 
 
     .name {
       width: 90%;
-      margin-bottom: 15px;
+      margin-bottom: 1.5rem;
     }
 
     .price {

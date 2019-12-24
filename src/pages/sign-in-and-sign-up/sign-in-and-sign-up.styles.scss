@@ -1,6 +1,13 @@
+
 .sign-in-and-sign-up {
     width: 85rem;
     display: flex;
     justify-content: space-between;
     margin: 3rem auto; //this is making sign-up and sign-in components centered
+
+    @media (max-width: 750px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }

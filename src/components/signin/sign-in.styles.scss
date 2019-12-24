@@ -2,6 +2,7 @@
   width: 38rem; //unexpected error occurs in design when the width property is set under the flex properties
   display: flex;
   flex-direction: column;
+  margin-bottom: 5rem;
 
   .title {
     margin: 10px 0;

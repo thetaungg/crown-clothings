@@ -47,7 +47,7 @@
   }
   @include respond(phone) {
     .option__sign-in {
-      white-space: nowrap;
+      white-space: nowrap; //to avoid line break when the width is too small
     }
   }
 }

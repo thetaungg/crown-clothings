@@ -11,7 +11,6 @@ const persistConfig = {
     key: 'root',
     storage, //local storage
     whitelist: ['cart'] //must be exported name from combineReducers// eg. if we want to persist userReducer , we'll also add 'user'
-
 };
 
 const rootReducer = combineReducers({

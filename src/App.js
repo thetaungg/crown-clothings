@@ -38,7 +38,9 @@ class App extends React.Component {
             }else {
                 setCurrentUser(userAuth); //if the user failed to sign in userAuth is the same as null
             }
-        });
+            // await addCollectionAndDocuments('collections',collectionsArray.map(({title, items } )=> ({title, items})))
+        }
+        );
     }
 
     componentWillUnmount() {
@@ -65,6 +67,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({ //const mapStateToProps = ({user}) => ({ //destructuring the state
     currentUser: selectCurrentUser
+    //collectionsArray: selectCollectionsForPreview
 });
 
 const mapDispatchToProps = dispatch => ({

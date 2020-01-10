@@ -1,0 +1,60 @@
+import React from 'react';
+import { Route } from 'react-router-dom'
+import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
+
+import CollectionPage from "../collection/collection.component";
+import WithSpinner from "../../components/with-spinner/with-spinner.component";
+
+import {firestore, convertCollectionSnapshotToMap} from "../../firebase/firebase.utils";
+import { connect } from 'react-redux';
+import { UpdateCollections } from "../../redux/shop/shop.actions";
+
+const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview); //withSpinner will return modified component// that's what HOC are for
+const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+
+class  ShopPage extends React.Component{
+
+    state = { //we don't need to call constructor, if we do it like this.
+        loading: true
+    };
+
+
+    unSubscribeFromSnapshot = null;
+
+    componentDidMount() {
+        const {updateCollections } = this.props;
+        const collectionRef = firestore.collection('collections');
+
+        // collectionRef.onSnapshot(async snapshot => {
+        //     const collectionMap = convertCollectionSnapshotToMap(snapshot);
+        //     updateCollections(collectionMap);
+        //     this.setState({loading: false})
+        // })
+        collectionRef.get().then(snapshot => {
+                const collectionMap = convertCollectionSnapshotToMap(snapshot);
+                updateCollections(collectionMap);
+                this.setState({loading: false})
+            });
+    }
+    componentWillUnmount() {
+        this.unSubscribeFromSnapshot();
+    }
+
+    render() {
+        const { match } = this.props; //one of the three props Route passed into ShopPage in App.js
+        const {loading} = this.state;
+        return(
+            <div className='shop-page'>
+                <Route exact path={`${match.path}`}
+                render={(props) => <CollectionsOverviewWithSpinner isLoading={loading} {...props} />} />
+
+                <Route path={`${match.path}/:collectionId`}
+                render={(props) => <CollectionPageWithSpinner isLoading={loading} {...props} /> }/> {/*if we want to make the url varying we don't want to make Route of ShopPage *exact* */}
+            </div>
+        )
+    }
+}
+const mapDispatchToProps = dispatch => ({
+    updateCollections: collectionMap => dispatch(UpdateCollections(collectionMap))
+});
+export default connect(null, mapDispatchToProps)(ShopPage);

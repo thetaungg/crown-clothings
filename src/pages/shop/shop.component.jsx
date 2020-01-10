@@ -1,61 +1,37 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
-import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
+import { Route } from 'react-router-dom';
 
-import CollectionPage from "../collection/collection.component";
-import WithSpinner from "../../components/with-spinner/with-spinner.component";
+import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
+import CollectionPageContainer from "../collection/collection.container";
 
-import {firestore, convertCollectionSnapshotToMap} from "../../firebase/firebase.utils";
 import { connect } from 'react-redux';
-import { UpdateCollections } from "../../redux/shop/shop.actions";
-
-const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview); //withSpinner will return modified component// that's what HOC are for
-const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+import { fetchCollectionsStartAsync } from "../../redux/shop/shop.actions";
 
 class  ShopPage extends React.Component{
 
-    state = { //we don't need to call constructor, if we do it like this.
-        loading: true
-    };
-
-
-    unSubscribeFromSnapshot = null;
-
     componentDidMount() {
-        const {updateCollections } = this.props;
-        const collectionRef = firestore.collection('collections');
-
-        // collectionRef.onSnapshot(async snapshot => {
-        //     const collectionMap = convertCollectionSnapshotToMap(snapshot);
-        //     updateCollections(collectionMap);
-        //     this.setState({loading: false})
-        // })
-        collectionRef.get().then(snapshot => {
-                const collectionMap = convertCollectionSnapshotToMap(snapshot);
-                updateCollections(collectionMap);
-                this.setState({loading: false})
-            });
-    }
-    componentWillUnmount() {
-        this.unSubscribeFromSnapshot();
+        const { fetchCollectionsStartAsync } = this.props;
+        fetchCollectionsStartAsync(); //using redux-thunk //this is async request
     }
 
     render() {
         const { match } = this.props; //one of the three props Route passed into ShopPage in App.js
-        const {loading} = this.state;
         return(
             <div className='shop-page'>
-                <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewWithSpinner isLoading={loading} {...props} />} />
-                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={loading} {...props} /> }/> {/*if we want to make the url varying we don't want to make Route of ShopPage *exact* */}
+                <Route exact path={`${match.path}`}
+                       component={CollectionsOverviewContainer} />
+                {/*<Route path={`${match.path}/:collectionId`}*/}
+                {/*       render={(props) => <CollectionPageWithSpinner //this doesn't work with isCollectionFetching because the value we get for that is async request inside of componentdidmount which runs after render method, so, the state of fetching is only updated after we rendered the components,so, the loading doesn't appear*/}
+                {/*           isLoading={!isCollectionsLoaded} {...props} /> }/> /!*if we want to make the url varying we don't want to make Route of ShopPage *exact* *!/*/}
+                <Route path={`${match.path}/:collectionId`}
+                       component={CollectionPageContainer} />
             </div>
         )
     }
-
-
 }
 
 const mapDispatchToProps = dispatch => ({
-    updateCollections: collectionMap => dispatch(UpdateCollections(collectionMap))
+    fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
 });
 
 export default connect(null, mapDispatchToProps)(ShopPage);

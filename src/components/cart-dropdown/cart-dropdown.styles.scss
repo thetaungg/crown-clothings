@@ -1,5 +1,7 @@
 .cart-dropdown {
   position: absolute;
+  top: 8.5rem;
+  right: 4rem;
   width: 24rem;
   height: 34rem;
   display: flex;
@@ -7,8 +9,6 @@
   padding: 2rem;
   border: 1px solid black;
   background-color: white;
-  top: 9rem;
-  right: 4rem;
   z-index: 5;
 
   .cart-items {
@@ -25,5 +25,19 @@
 
   button {
     margin-top: auto;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -4.5%;
+    right: 15.5%;
+    //css triangle // facing up //with width and height zero the corner where border meets are all left of the box(which is a form of triangle) //check this out https://css-tricks.com/snippets/css/css-triangle/
+    width: 0;
+    height: 0;
+    border-left: 1.5rem solid transparent;
+    border-right: 1.5rem solid transparent;
+
+    border-bottom: 1.5rem solid #4a4a4a;
   }
 }

@@ -1,7 +1,7 @@
 import ShopActionTypes from "./shop.types";
 import {convertCollectionSnapshotToMap, firestore} from "../../firebase/firebase.utils";
 
-export const fetchCollectionsStart = () => ({
+export const fetchCollectionsStart = () => ({// if a component use this function, if its action type coincide with a saga, tha t saga will run
     type: ShopActionTypes.FETCH_COLLECTIONS_START,
 });
 
@@ -15,7 +15,7 @@ export const fetchCollectionsFailure = errorMessage => ({
     payload: errorMessage
 });
 
-export const fetchCollectionsStartAsync = () => {
+export const fetchCollectionsStartAsync = () => { //thunk code // not needed now
     return dispatch => {//every time we want to dispatch a function instead of returning an object in redux thunk middleware gets called
 
         const collectionRef = firestore.collection('collections');

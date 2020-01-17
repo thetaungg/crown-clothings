@@ -7,6 +7,7 @@
   justify-content: space-between;
   margin-bottom: 2.5rem;
   font-size: 1.6rem;
+  z-index: 2;
 
   @include respond(phone) {
     font-size: 1.4rem;

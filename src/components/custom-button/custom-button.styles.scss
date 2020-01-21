@@ -16,19 +16,18 @@
   display: flex;
   justify-content: center;
   outline: inherit;
-  box-shadow: 0 1.5rem 4rem rgba(0,0,0,.15);
   transition: all .05s;
 
   &:hover {
     background-color: white;
     color: black;
     border: 1px solid black;
-    transform: translateY(-.2rem) scale(1.05);
-    box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
+    transform: translateY(-.05rem) scale(1.05);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
   }
   &:active {
-    transform: translateY(.1rem) scale(1);
-    box-shadow: 0 .5rem 2rem rgba(0,0,0,.15);
+    transform: translateY(.005rem) scale(1);
+    box-shadow: 0 .05rem 1rem rgba(0,0,0,.15);
   }
   &.google-sign-in{
     background-color: #4285f4;

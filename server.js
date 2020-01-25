@@ -3,8 +3,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path'); //built in from node
 
-if (process.env.NODE_ENV !== 'production') require('dotenv').config();  //only load .env when we are not in production
-
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();  //only load .env when we are not in production //because we're not gonna share our .env file with anyone
+//if we deploy it to heroku we need to create this environmental variable on heroku app of course
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);// we can do this because of dotenv it finds automatically .env file
 
 const app = express();

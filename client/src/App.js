@@ -15,12 +15,18 @@ import {selectCurrentUser} from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
 import SignUpAndSignInPageContainer from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.container";
 
+import ReactGA from 'react-ga'; //package for google analytics in react
+
+
 
 const App = ({checkUserSession, currentUser}) => {//using hooks
 
     useEffect(() => {
         checkUserSession();//checkUserSession is a prop ,so, it's not gonna change
     }, [checkUserSession]); //if we leave it empty, when the user is already signed in the components will re-render again,so, useEffect will run second time
+
+    ReactGA.initialize('UA-157015392-3'); //adding google analytics
+    ReactGA.pageview(window.location.pathname + window.location.search); //this tracks all the pages that user visits in this website
 
     return (
         <div>

@@ -7,6 +7,10 @@ body{
     @include respond(tab-port) {
         padding: 1rem 2rem;
     }
+
+    @include respond(phone) {
+        padding: 1rem .5rem;
+    }
 }
 html {
     font-size: 62.5%; // 10/16 = 0.625% //so, 1rem = 10px now//

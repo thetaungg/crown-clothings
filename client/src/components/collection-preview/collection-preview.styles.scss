@@ -9,6 +9,10 @@
     font-size: 2.8rem;
     margin-bottom: 2.5rem;
     cursor: pointer;
+
+    @include respond(phone) {
+      text-align: center;
+    }
   }
 
   .preview {

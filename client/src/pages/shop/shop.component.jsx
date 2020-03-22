@@ -31,7 +31,7 @@ const  ShopPage = ({match, fetchCollectionsStart}) => {
     )
 };
 const mapDispatchToProps = dispatch => ({//with saga
-    fetchCollectionsStart: () => dispatch(fetchCollectionsStart()) //*******
+    fetchCollectionsStart: () => dispatch(fetchCollectionsStart()) //******
 });
 
 // const mapDispatchToProps = dispatch => ({//with thunk

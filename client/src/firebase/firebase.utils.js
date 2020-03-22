@@ -3,9 +3,9 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-    apiKey: "AIzaSyCwyHQFh0fhhnmS-RHhYhrfQLbuN--yq3E",
-    authDomain: "crown-db-38284.firebaseapp.com",
-    databaseURL: "https://crown-db-38284.firebaseio.com",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
     projectId: "crown-db-38284",
     storageBucket: "crown-db-38284.appspot.com",
     messagingSenderId: "282105219809",

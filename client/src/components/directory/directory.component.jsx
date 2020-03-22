@@ -8,7 +8,7 @@ import { selectDirectorySections } from "../../redux/directory/directory.selecto
 
 const Directory = ({sections}) => (
     <div className="directory-menu">
-        {       //es6 property
+        {//es6 property
             sections.map(({id,...otherSectionProps}) => (
                 <MenuItem key={id} {...otherSectionProps}/>
                 )//we can do it like this because the names of both sides of equations are the same eg size={size}

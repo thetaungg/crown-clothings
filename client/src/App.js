@@ -1,23 +1,23 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, lazy, Suspense} from 'react';
 import {Switch,Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from "reselect";
 
 import './App.scss';
-
-import Homepage from "./pages/homepage/Homepage.components";
-import ShopPage from "./pages/shop/shop.component";
-import CheckoutPage from "./pages/checkout/checkout.component";
-
 import Header from "./components/header/header.component";
 import {selectCurrentUser} from "./redux/user/user.selectors";
+import Spinner from "./components/spinner/spinner.component";
 
 import { checkUserSession } from "./redux/user/user.actions";
-import SignUpAndSignInPageContainer from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.container";
 
-import ReactGA from 'react-ga'; //package for google analytics in react
+import ReactGA from 'react-ga';
+import ErrorBoundary from "./components/error-boundary/error-boundary.component"; //package for google analytics in react
 
-
+//lazy splits app's js bundle into multiple files and only loads the part the app needs. It works well with react-router
+const HomePage = lazy(() => import("./pages/homepage/Homepage.components")); //lazy loads components asynchronously ,so, we need suspense to show something while the component is being loaded
+const ShopPage = lazy(() => import("./pages/shop/shop.component"));
+const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
+const SignUpAndSignInPageContainer = lazy(() => import('./pages/sign-in-and-sign-up/sign-in-and-sign-up.container'));
 
 const App = ({checkUserSession, currentUser}) => {//using hooks
 
@@ -32,11 +32,15 @@ const App = ({checkUserSession, currentUser}) => {//using hooks
         <div>
             <Header />
             <Switch> {/*switch render the first component the path matches and ignore the rest */}
-                <Route exact path='/' component={Homepage}/>
-                <Route exact path='/checkout' component={CheckoutPage}/>
-                <Route path='/shop' component={ShopPage}/>
-                <Route exact path='/signin' render={() => currentUser ?
-                    (<Redirect to='/'/>) : (<SignUpAndSignInPageContainer/>) }/> {/*if the user is signedIn we are redirecting to the homepage*/}
+                <ErrorBoundary> {/* we wrap around suspense so that when the connect goes down or the server goes down. we have some ways to let the users know*/}
+                    <Suspense fallback={<Spinner/>}> {/*fallback is for when the components are loading// suspense can wrap multiple lazy components*/}
+                        <Route exact path='/' component={HomePage}/>
+                        <Route exact path='/checkout' component={CheckoutPage}/>
+                        <Route path='/shop' component={ShopPage}/>
+                        <Route exact path='/signin' render={() => currentUser ?
+                            (<Redirect to='/'/>) : (<SignUpAndSignInPageContainer/>) }/> {/*if the user is signedIn we are redirecting to the homepage*/}
+                    </Suspense>
+                </ErrorBoundary>
             </Switch>
         </div>
     );

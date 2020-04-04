@@ -32,7 +32,7 @@ const App = ({checkUserSession, currentUser}) => {//using hooks
         <div>
             <Header />
             <Switch> {/*switch render the first component the path matches and ignore the rest */}
-                <ErrorBoundary> {/* we wrap around suspense so that when the connect goes down or the server goes down. we have some ways to let the users know*/}
+                <ErrorBoundary> {/* we wrap around suspense so that when the connect goes down or the server goes down. we can display fallback UIs to let the users know what went wrong*/}
                     <Suspense fallback={<Spinner/>}> {/*fallback is for when the components are loading// suspense can wrap multiple lazy components*/}
                         <Route exact path='/' component={HomePage}/>
                         <Route exact path='/checkout' component={CheckoutPage}/>

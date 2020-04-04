@@ -21,7 +21,7 @@ const  ShopPage = ({match, fetchCollectionsStart}) => {
     //const { match } = this.props; //one of the three props Route passed into ShopPage in App.js
     return(
         <div className='shop-page'>
-            <Suspense fallback={Spinner}>
+            <Suspense fallback={<Spinner />}>
                 <Route exact path={`${match.path}`}
                        component={CollectionsOverviewContainer} />
                 {/*<Route path={`${match.path}/:collectionId`}*/}

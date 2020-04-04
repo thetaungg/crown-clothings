@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path'); //built in from node
+const compression = require('compression');
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();  //only load .env when we are not in production //because we're not gonna share our .env file with anyone
 //if we deploy it to heroku we need to create this environmental variable on heroku app of course
@@ -10,6 +11,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);// we can do thi
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(compression()); //for compressing the files we send from the server
 app.use(bodyParser.json()); //when requests sends with body we want to convert the json data into objects
 app.use(bodyParser.urlencoded({extended: true})); //encoding url parameters
 
